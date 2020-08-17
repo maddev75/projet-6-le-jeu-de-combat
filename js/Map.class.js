@@ -99,9 +99,6 @@ class Map {
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes(weapons[index])){
             target.addClass('player');
             target.addClass(players[index]);
-            
-            //if(index ===0) {
-                //this.playerOne.position = {x:x,y:y};
             }
             else{
             console.error('cette case contient une classe');
