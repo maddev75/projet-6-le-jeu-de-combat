@@ -1,0 +1,49 @@
+
+#map {
+  text-align: center;
+  margin: auto;
+
+}
+.row {
+    height: 50px;
+}
+
+.col {
+   background: white;
+    display: inline-block;
+    width:50px;
+    height: 50px;
+    border: solid 1px black;
+  }
+.wall {
+    background-color: black;
+}
+.gun {
+  background-image: url('img-jeux/gun.jpg');
+  background-size: contain;
+}
+.lance-rocket {
+  background-image: url('img-jeux/lance-rocket.jpg');
+  background-size: contain;
+}
+.missile{
+  background-image: url('img-jeux/missile.jpg');
+  background-size: contain;
+}
+.mitraillette {
+  background-image: url('img-jeux/mitraillette.jpg');
+  background-size: contain;
+}
+.soldat1 {
+  background-image: url('img-jeux/soldat1.jpg');
+  background-size: contain;
+}
+.soldat2 {
+  background-image: url('img-jeux/soldat2.jpg');
+  background-size: contain;
+}
+
+
+
+
+
