@@ -41,7 +41,7 @@ class Map {
             }
         }
         for(let i=0; i < 2; i++){
-            checkPlayer1();
+            //checkPlayer1();
             let resultPlayers = this.createPlayers(players,i);
             console.log(resultPlayers);
             if(resultPlayers === 0){
@@ -93,37 +93,42 @@ class Map {
     createPlayers = (players, index)=> {
         let y =  this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
-        let target = $('#col_'+ x + "_" + y);
+        let perso = {x: x, y:y};
+        if(index > 0){
+           perso = keepSocialDistanceFrom(this.playerOne, 1)
+        }
+        let target = $('#col_'+ perso.x + "_" + perso.y);
         //console.log(target[0].className);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes(weapons[index])){
             target.addClass('player');
             target.addClass(players[index]);
+
+            if(index === 0) {
+                this.playerOne = {x: perso.x, y: perso.y}
+            }else{
+                this.playerTwo = {x: perso.x, y: perso.y}
             }
-            else{
+        } else{
             console.error('cette case contient une classe');
             return 0
         }
     }
 }
-    checkPlayer1 = (x, y)=> {
-        let j1 = {x:5, y:5}
+    keepSocialDistanceFrom = (j1, nbCases)=> {
+        
         let j2 = {x:5, y:5}
+        console.log(j2);
+        console.log("type of j2:",typeof(j2));
         let good = false;
         while(!good) {
            j2.y = Math.floor(Math.random()*10);
            j2.x = Math.floor(Math.random()*10);
            console.log(j2);
-            if(Math.abs(j2.x-j1.x) > 3 && Math.abs(j2.y-j1.y) > 3) {
+            if(Math.abs(j2.x - j1.x) > nbCases && Math.abs(j2.y - j1.y) > nbCases) {
                 good = true;
-                console.log('good'+good);
+                return j2;
         }
     }
     
 }
-
-
-
-
-
-
