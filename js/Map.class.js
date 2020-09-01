@@ -1,5 +1,5 @@
 let weapons = ["gun", "mitraillette", "missile", "lance-rocket"];
-let players = ['soldat1', 'soldat2'];
+let players = ['player1', 'player2'];
 
 class Map {
     constructor(container, columns, lines, walls, weapons) {
@@ -7,13 +7,19 @@ class Map {
         this.lgn = lines;
         this.mur = walls;
         this.container = container;
-        this.weapons = 4;
-        this.players = 2;
+        this.weapons = weapons;
+        this.players = players;
         this.playerOne = null;
         this.playerTwo = null;
         this.drawMap();
     }
     drawMap() {
+        this.createGrid();
+        this.createElement('wall', this.mur, 0);
+        this.createElement('weapon', this.weapons.length, 0);
+        this.createElement('player', this.players.length, 3);
+    }
+    createGrid() {
         const $jeu = $(this.container);
         for(let lgn=0; lgn < this.lgn; lgn++){
             const $lgn = $('<div>').addClass('row');
@@ -22,35 +28,29 @@ class Map {
                 const $col = $('<div>').addClass('col').attr('id', 'col_'+ lgn + '_' + col);
                 $lgn.append($col);
                 $jeu.append($lgn);
+                    }
+                }
             }
-        }
-        for(let i=0; i < this.mur; i++){
-           let resultWalls = this.createWalls();
-           console.log(resultWalls);
-           if(resultWalls === 0){
-               i--
-               console.log(resultWalls);
-           }
-        }
-        for(let i=0; i < 4; i++){
-            let resultWeapons = this.createWeapons(weapons,i);
-            console.log(resultWeapons);
-            if(resultWeapons === 0){
-                i--
-                console.log(resultWeapons);
+    createElement = (type, quantity, minimumDistance)=> {
+        let create;
+        for (let i =0; i < quantity; i++){
+            switch (type) {
+                case 'wall':
+                    create = this.createWalls();
+                        break;
+                case 'weapon':
+                    create = this.createWeapons(this.weapons, i);
+                        break;
+                case 'player':
+                    create = this.createPlayers(this.players, i, minimumDistance);
+                        break;
             }
-        }
-        for(let i=0; i < 2; i++){
-            //checkPlayer1();
-            let resultPlayers = this.createPlayers(players,i);
-            console.log(resultPlayers);
-            if(resultPlayers === 0){
+            if(create === 0) {
                 i--
-                console.log(resultPlayers);
             }
         }
     }
-    createWalls = () => {
+createWalls = () => {
         let x = this.getRandomInt(this.col);
         let y = this.getRandomInt(this.lgn);
         // on récupère la case sélectionnée au hasard
@@ -93,11 +93,13 @@ class Map {
     createPlayers = (players, index)=> {
         let y =  this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
-        let perso = {x: x, y:y};
+        let position = this.players[index].pseudo
+        ;
+        position = {x: x, y:y};
         if(index > 0){
-           perso =this.keepSocialDistanceFrom(this.playerOne, 3)
+           position = this.keepSocialDistanceFrom(this.playerOne, 3)
         }
-        let target = $('#col_'+ perso.x + "_" + perso.y);
+        let target = $('#col_'+ position.x + "_" + position.y);
         //console.log(target[0].className);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
@@ -105,9 +107,9 @@ class Map {
             target.addClass(players[index]);
 
             if(index === 0) {
-                this.playerOne = {x: perso.x, y: perso.y}
+                this.playerOne = {x: position.x, y: position.y}
             }else{
-                this.playerTwo = {x: perso.x, y: perso.y}
+                this.playerTwo = {x: position.x, y: position.y}
             }
         } else{
             console.error('cette case contient une classe');
@@ -128,6 +130,7 @@ class Map {
                 return j2;
             }
         }
-    
     }
 }
+
+

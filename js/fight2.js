@@ -1,11 +1,11 @@
 class Soldat {
-    constructor(pseudo, sante, attaque, defendre, niveau) {
+    constructor(pseudo, sante, attaque, defendre, niveau, position) {
         this.pseudo = pseudo;
-        this.classe = classe;
         this.sante = sante;
         this.attaque = attaque;
         this.defendre = defendre;
         this.niveau = 100;
+        this.position = position;
     }
     
     get informations() {
