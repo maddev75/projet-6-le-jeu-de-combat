@@ -1,8 +1,8 @@
 let weapons = ["gun", "mitraillette", "missile", "lance-rocket"];
-let players = ['player1', 'player2'];
+let players  = ['soldat1', 'soldat2'];
 
 class Map {
-    constructor(container, columns, lines, walls, weapons) {
+    constructor(container, columns, lines, walls, weapons, players) {
         this.col = columns;
         this.lgn = lines;
         this.mur = walls;
@@ -56,9 +56,9 @@ createWalls = () => {
         // on récupère la case sélectionnée au hasard
         let target = $('#col_'+ x + "_" + y);
         // on récupère ses classes ds un tableau
-        console.log(target[0].className);
+        console.log('target'+target[0].className);
         let classes = target[0].className.split(/\s+/);
-        //console.log(classes);
+        console.log('classes'+classes);
         // on vérifie que la classe a pas déjà un wall
         if(!classes.includes('wall')){
             //si elle a pas de wall
@@ -90,22 +90,20 @@ createWalls = () => {
               return 0
         }
     }
-    createPlayers = (players, index)=> {
+    createPlayers = (players, index, distance)=> {
         let y =  this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
-        let position = this.players[index].pseudo
-        ;
-        position = {x: x, y:y};
+        let position = {x: x, y:y};
         if(index > 0){
-           position = this.keepSocialDistanceFrom(this.playerOne, 3)
+           position = this.keepSocialDistanceFrom(this.playerOne, distance);
         }
-        let target = $('#col_'+ position.x + "_" + position.y);
+        let target = $('#col_'+ x + "_" + y);
         //console.log(target[0].className);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
             target.addClass('player');
             target.addClass(players[index]);
-
+            
             if(index === 0) {
                 this.playerOne = {x: position.x, y: position.y}
             }else{
@@ -132,5 +130,6 @@ createWalls = () => {
         }
     }
 }
+
 
 
