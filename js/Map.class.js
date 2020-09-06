@@ -12,7 +12,7 @@ class Map {
         this.playerOne = null;
         this.playerTwo = null;
         this.drawMap();
-    }
+    }Z
     drawMap() {
         this.createGrid();
         this.createElement('wall', this.mur, 0);
@@ -50,7 +50,7 @@ class Map {
             }
         }
     }
-createWalls = () => {
+    createWalls = () => {
         let x = this.getRandomInt(this.col);
         let y = this.getRandomInt(this.lgn);
         // on récupère la case sélectionnée au hasard
@@ -90,14 +90,15 @@ createWalls = () => {
               return 0
         }
     }
-    createPlayers = (players, index, distance)=> {
+    createPlayers = (players, index)=> {
         let y =  this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
-        let position = {x: x, y:y};
+        let position = {x:x, y:y};
         if(index > 0){
-           position = this.keepSocialDistanceFrom(this.playerOne, distance);
+           position = this.keepSocialDistanceFrom(this.playerOne, 3);
+           
         }
-        let target = $('#col_'+ x + "_" + y);
+        let target = $('#col_'+ position.x + " _" + position.y);
         //console.log(target[0].className);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
@@ -106,6 +107,7 @@ createWalls = () => {
             
             if(index === 0) {
                 this.playerOne = {x: position.x, y: position.y}
+                
             }else{
                 this.playerTwo = {x: position.x, y: position.y}
             }
