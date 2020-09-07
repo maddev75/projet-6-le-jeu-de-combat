@@ -12,7 +12,7 @@ class Map {
         this.playerOne = null;
         this.playerTwo = null;
         this.drawMap();
-    }Z
+    }
     drawMap() {
         this.createGrid();
         this.createElement('wall', this.mur, 0);
@@ -91,27 +91,24 @@ class Map {
         }
     }
     createPlayers = (players, index)=> {
-        let y =  this.getRandomInt((this.lgn));
+        let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let position = {x:x, y:y};
         if(index > 0){
            position = this.keepSocialDistanceFrom(this.playerOne, 3);
-           
-        }
+           }
         let target = $('#col_'+ position.x + " _" + position.y);
-        //console.log(target[0].className);
+        console.log(target[0].className);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
             target.addClass('player');
             target.addClass(players[index]);
-            
             if(index === 0) {
-                this.playerOne = {x: position.x, y: position.y}
-                
+                this.playerOne = {x: position.x, y: position.y};
             }else{
-                this.playerTwo = {x: position.x, y: position.y}
+                this.playerTwo = {x: position.x, y: position.y};
             }
-        } else{
+            }else{
             console.error('cette case contient une classe');
             return 0
         }
@@ -133,5 +130,5 @@ class Map {
     }
 }
 
-
+//"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
 
