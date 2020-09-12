@@ -78,6 +78,7 @@ class Map {
         let y =  this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let target = $('#col_'+ x + "_" + y);
+        console.log(target);
         //<div class="case vide"></div>
         console.log(target[0].className);
         //classes=["case","vide"];
@@ -94,15 +95,16 @@ class Map {
         let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let position = {x:x, y:y};
+        console.log(position);
         if(index > 0){
            position = this.keepSocialDistanceFrom(this.playerOne, 3);
            }
-        let target = $('#col_'+ position.x + " _" + position.y);
-        console.log(target[0].className);
+        let target = $('#col_'+ position.x + "_" + position.y);
+        console.log(target);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
             target.addClass('player');
-            target.addClass(players[index]);
+            target.addClass(players[index].pseudo);
             if(index === 0) {
                 this.playerOne = {x: position.x, y: position.y};
             }else{
