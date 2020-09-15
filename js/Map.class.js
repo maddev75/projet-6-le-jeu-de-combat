@@ -6,11 +6,12 @@ class Map {
         this.col = columns;
         this.lgn = lines;
         this.mur = walls;
+        //this.yellow = yellow;
         this.container = container;
         this.weapons = weapons;
         this.players = players;
-        this.playerOne = null;
-        this.playerTwo = null;
+        this.player1 = null;
+        this.player2 = null;
         this.drawMap();
     }
     drawMap() {
@@ -18,6 +19,8 @@ class Map {
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
+        //this.createElement('yellow', this.yellow, 0);
+
     }
     createGrid() {
         const $jeu = $(this.container);
@@ -44,7 +47,10 @@ class Map {
                 case 'player':
                     create = this.createPlayers(this.players, i, minimumDistance);
                         break;
-            }
+                /*case 'yellow':
+                    create = this.createYellow();
+                        break;*/
+                }
             if(create === 0) {
                 i--
             }
@@ -97,40 +103,75 @@ class Map {
         let position = {x:x, y:y};
         console.log(position);
         if(index > 0){
-           position = this.keepSocialDistanceFrom(this.playerOne, 3);
+           position = this.keepSocialDistanceFrom(this.player1, 3);
            }
         let target = $('#col_'+ position.x + "_" + position.y);
         console.log(target);
         let classes = target[0].className.split(/\s+/);
         if(!classes.includes('player')&&!classes.includes('wall')&&!classes.includes('weapon')){
             target.addClass('player');
+            //target.addClass('yellow');
             target.addClass(players[index].pseudo);
             if(index === 0) {
-                this.playerOne = {x: position.x, y: position.y};
+                this.player1 = {x: position.x, y: position.y};
+                //this.player1.style.left('orange');
             }else{
-                this.playerTwo = {x: position.x, y: position.y};
+                this.player2 = {x: position.x, y: position.y};
+                //this.player2.addClass('yelllow');
             }
             }else{
-            console.error('cette case contient une classe');
-            return 0
+                console.error('cette case contient une classe');
+                return 0
+            }
         }
-    }
-    keepSocialDistanceFrom = (joueur, nbCases)=> {
-        let j2 = {x:5, y:5}
-        console.log(j2);
-        console.log("type of j2:",typeof(j2));
-        let good = false;
-        while(!good) {
-           j2.y =  this.getRandomInt((this.lgn));
-           j2.x =  this.getRandomInt((this.col));
-           console.log(j2);
+        /*createYellow = ()=> {
+            let y = this.getRandomInt((this.lgn));
+            let x = this.getRandomInt((this.col));
+            let target = $('#col_'+ x + "_" + y);
+            console.log(target);
+            let classes = target[0].className.split(/\s+/);
+            if(!classes.includes('player')&&!classes.includes('yellow')&&!classes.includes('wall')&&!classes.includes('weapon')){
+                target.addClass('yellow');
+                //target.addClass('yellow');
+            }
+        }*/
+        keepSocialDistanceFrom = (joueur, nbCases)=> {
+            let j2 = {x:5, y:5}
+            console.log(j2);
+            console.log("type of j2:",typeof(j2));
+            let good = false;
+            while(!good) {
+            j2.y =  this.getRandomInt((this.lgn));
+            j2.x =  this.getRandomInt((this.col));
+            console.log(j2);
             if(Math.abs(j2.x - joueur.x) > nbCases && Math.abs(j2.y - joueur.y) > nbCases) {
                 good = true;
                 return j2;
             }
+        
         }
     }
+    zoneDeplacement = (joueur, nbCases)=> {
+        let j2 = {x:5, y:5}
+        
+        console.log(j2);
+        console.log("type of j2:",typeof(j2));
+        let good = false;
+        while(!good) {
+        j2.y =  this.getRandomInt((this.lgn));
+        j2.x =  this.getRandomInt((this.col));
+        console.log(j2);
+        if(Math.abs(j2.x - joueur.x) === 1 && Math.abs(j2.y - joueur.y) ===1) {
+            good = true;
+            j2.addClass('yellow');
+            return j2;
+        }
 }
+  /* zoneDeplacemnt = ()=> {
+        this.player1.addClass('yellow');
+        this.player2.addClass('yelllow');
+    }
+}*/
 
-//"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+
 

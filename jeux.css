@@ -42,6 +42,10 @@
   background-image: url('img-jeux/soldat2.jpg');
   background-size: contain;
 }
+.yellow {
+  background-color: yellow;
+  
+}
 
 
 
