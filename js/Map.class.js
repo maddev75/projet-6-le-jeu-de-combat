@@ -18,10 +18,10 @@ class Map {
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
-       /* this.setMooveValable('right', this.player1, 3);
+        this.setMooveValable('right', this.player1, 3);
         this.setMooveValable('left', this.player1, 3);
         this.setMooveValable('top', this.player1, 3);
-        this.setMooveValable('bottom', this.player1, 3);*/
+        this.setMooveValable('bottom', this.player1, 3);
     }
     createGrid() {
         const $jeu = $(this.container);
@@ -100,15 +100,8 @@ class Map {
         let x = this.getRandomInt((this.col));
         let position = { x: x, y: y };
         console.log(position);
-        if(index ===1) {
-        let tour = this.getRandomInt((this.players.length));
-        if (tour === 1) {
+        if(index > 0 ) {
             position = this.keepSocialDistanceFrom(this.player1, 3);
-            this.setMooveValableRight(this.player1, 3);
-        }
-        }else{
-            position = this.keepSocialDistanceFrom(this.player2, 3);
-            this.setMooveValableRight(this.player2, 3);
         }
         let target = $('#col_' + position.x + "_" + position.y);
         console.log(target);
@@ -116,18 +109,21 @@ class Map {
         if (!classes.includes('player') && !classes.includes('wall') && !classes.includes('weapon')) {
             target.addClass('player');
             target.addClass(players[index].pseudo);
-            if (tour === 0) {
+            
+            if(index ===0){
                 this.player1 = { x: position.x, y: position.y };
-                this.setMooveValableRight(this.player1, 3)
-            } else {
+                
+         } else {
                 this.player2 = { x: position.x, y: position.y };
-                this.setMooveValableRight(this.player2, 3)
-            }
-        } else {
+         }
+         
+          } else {
             console.error('cette case contient une classe');
             return 0
         }
     }
+
+    
     keepSocialDistanceFrom = (joueur, nbCases) => {
         let j2 = { x: 5, y: 5 }
         console.log(j2);
@@ -159,16 +155,7 @@ class Map {
             }
         }
     }
-    /* moovePosition = (boardCase)=> {
-       if (boardCase[0] !== undefined) {
-        let classes = boardCase[0].className.split(/\s+/);
-            if (!classes.includes('wall')) {
-                boardCase.addClass('yellow');
-            } else {
-                return 0
-            }
-        }*/
-    setMooveValableLeft = (joueur, nbCases) => {
+   setMooveValableLeft = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.x}_${joueur.y - i}`
             let boardCase = $(caseString);
@@ -233,6 +220,8 @@ class Map {
         }
     }
 }
+
+
 
 
 
