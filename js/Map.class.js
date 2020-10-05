@@ -11,17 +11,29 @@ class Map {
         this.players = players;
         this.player1 = null;
         this.player2 = null;
+        this.persoActuel = null;
         this.drawMap();
     }
     drawMap() {
+        let nb_aleat = this.getRandomInt(2);
+        console.log('aleat'+nb_aleat);
+        if (nb_aleat === 1) {
+            this.persoActuel = this.players[1].pseudo;
+            alert(this.players[1].pseudo+ " commence la partie.");
+         
+          } else {
+            this.persoActuel = this.players[0].pseudo;
+            alert(this.players[0].pseudo + " commence la partie.");
+           
+          }
         this.createGrid();
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
-        this.setMooveValable('right', this.player1, 3);
-        this.setMooveValable('left', this.player1, 3);
-        this.setMooveValable('top', this.player1, 3);
-        this.setMooveValable('bottom', this.player1, 3);
+        this.setMooveValable('right', this.persoActuel, 3);
+        this.setMooveValable('left', this.persoActuel, 3);
+        this.setMooveValable('top', this.persoActuel, 3);
+        this.setMooveValable('bottom', this.persoActuel, 3);
     }
     createGrid() {
         const $jeu = $(this.container);
@@ -101,6 +113,7 @@ class Map {
         let position = { x: x, y: y };
         console.log(position);
         if(index > 0 ) {
+            
             position = this.keepSocialDistanceFrom(this.player1, 3);
         }
         let target = $('#col_' + position.x + "_" + position.y);
@@ -122,8 +135,6 @@ class Map {
             return 0
         }
     }
-
-    
     keepSocialDistanceFrom = (joueur, nbCases) => {
         let j2 = { x: 5, y: 5 }
         console.log(j2);
@@ -220,6 +231,9 @@ class Map {
         }
     }
 }
+
+
+
 
 
 
