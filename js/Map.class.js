@@ -9,13 +9,10 @@ class Map {
         this.container = container;
         this.weapons = weapons;
         this.players = players;
-        this.player1 = null;
-        this.player2 = null;
-        this.persoActuel = null;
         this.drawMap();
     }
     drawMap() {
-        let nb_aleat = this.getRandomInt(2);
+        /*let nb_aleat = this.getRandomInt(2);
         console.log('aleat'+nb_aleat);
         if (nb_aleat === 1) {
             this.persoActuel = this.players[1].pseudo;
@@ -24,16 +21,15 @@ class Map {
           } else {
             this.persoActuel = this.players[0].pseudo;
             alert(this.players[0].pseudo + " commence la partie.");
-           
-          }
+           }*/
         this.createGrid();
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
-        this.setMooveValable('right', this.persoActuel, 3);
+        /*this.setMooveValable('right', this.persoActuel, 3);
         this.setMooveValable('left', this.persoActuel, 3);
         this.setMooveValable('top', this.persoActuel, 3);
-        this.setMooveValable('bottom', this.persoActuel, 3);
+        this.setMooveValable('bottom', this.persoActuel, 3);*/
     }
     createGrid() {
         const $jeu = $(this.container);
@@ -87,7 +83,7 @@ class Map {
             return 0
         }
     }
-    getRandomInt = (max) => {
+    getRandomInt = (max) => { 
         return Math.floor(Math.random() * Math.floor(max));
     }
     createWeapons = (weapons, index) => {
@@ -113,8 +109,7 @@ class Map {
         let position = { x: x, y: y };
         console.log(position);
         if(index > 0 ) {
-            
-            position = this.keepSocialDistanceFrom(this.player1, 3);
+            position = this.keepSocialDistanceFrom(this.players[0], 3);
         }
         let target = $('#col_' + position.x + "_" + position.y);
         console.log(target);
@@ -124,10 +119,10 @@ class Map {
             target.addClass(players[index].pseudo);
             
             if(index ===0){
-                this.player1 = { x: position.x, y: position.y };
+                this.players[0].position = { x: position.x, y: position.y };
                 
          } else {
-                this.player2 = { x: position.x, y: position.y };
+                this.players[1].position = { x: position.x, y: position.y };
          }
          
           } else {
@@ -144,7 +139,7 @@ class Map {
             j2.y = this.getRandomInt((this.lgn));
             j2.x = this.getRandomInt((this.col));
             console.log(j2);
-            if (Math.abs(j2.x - joueur.x) > nbCases && Math.abs(j2.y - joueur.y) > nbCases) {
+            if (Math.abs(j2.x - joueur.position.x) > nbCases && Math.abs(j2.y - joueur.position.y) > nbCases) {
                 good = true;
                 return j2;
             }
@@ -152,7 +147,7 @@ class Map {
     }
     setMooveValableRight = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.x}_${joueur.y + i}`
+            let caseString = `#col_${joueur.position.x}_${joueur.position.y + i}`
             let boardCase = $(caseString);
             //this.moovePosition(boardCase);
            console.log(boardCase);
@@ -168,13 +163,16 @@ class Map {
     }
    setMooveValableLeft = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.x}_${joueur.y - i}`
+            let caseString = `#col_${joueur.position.x}_${joueur.position.y - i}`
             let boardCase = $(caseString);
             console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
+                    $(boardCase).click(() =>{ 
+                        $(boardCase).css('color', 'orange');
+                        });
                 } else {
                     return 0
                 }
@@ -183,7 +181,7 @@ class Map {
     }
     setMooveValableTop = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.x + i}_${joueur.y}`
+            let caseString = `#col_${joueur.position.x + i}_${joueur.position.y}`
             let boardCase = $(caseString);
             console.log(boardCase);
             if (boardCase[0] !== undefined) {
@@ -198,7 +196,7 @@ class Map {
     }
     setMooveValableBottom = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.x - i}_${joueur.y}`
+            let caseString = `#col_${joueur.position.x - i}_${joueur.position.y}`
             let boardCase = $(caseString);
             console.log(boardCase);
             if (boardCase[0] !== undefined) {

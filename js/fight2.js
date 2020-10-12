@@ -3,7 +3,7 @@ class Soldat {
         this.pseudo = pseudo;
         this.sante = sante;
         this.attaque = attaque;
-        this.defendre = defendre;
+        this.defendre = defendre;             
         this.niveau = 100;
         this.position = position;
     }
