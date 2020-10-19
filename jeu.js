@@ -20,6 +20,7 @@ let currentPlayerNb = getRandomInt(players.length);
         currentPlayer = map.players[1]
     }
 displayMoves(currentPlayer, map);
+listenMoves(map, currentPlayer);qsde
 });
 
 function displayMoves(currentPlayer, map) {
@@ -28,4 +29,16 @@ function displayMoves(currentPlayer, map) {
     map.setMooveValable('top', currentPlayer, 3);
     map.setMooveValable('bottom', currentPlayer, 3);
 }
+/*
+function listenMoves(map, currentPlayer){
+    let player
+    document.getElementById('map').addEventListener('click', ()=> {
+        if(currentPlayer === map.players[0]){
+            player = map.players[1]
+        }else{
+            player = map.players[0]
+        }
+        displayMoves(player, map);
+    })
+}*/
 

@@ -12,25 +12,11 @@ class Map {
         this.drawMap();
     }
     drawMap() {
-        /*let nb_aleat = this.getRandomInt(2);
-        console.log('aleat'+nb_aleat);
-        if (nb_aleat === 1) {
-            this.persoActuel = this.players[1].pseudo;
-            alert(this.players[1].pseudo+ " commence la partie.");
-         
-          } else {
-            this.persoActuel = this.players[0].pseudo;
-            alert(this.players[0].pseudo + " commence la partie.");
-           }*/
         this.createGrid();
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
-        /*this.setMooveValable('right', this.persoActuel, 3);
-        this.setMooveValable('left', this.persoActuel, 3);
-        this.setMooveValable('top', this.persoActuel, 3);
-        this.setMooveValable('bottom', this.persoActuel, 3);*/
-    }
+      }
     createGrid() {
         const $jeu = $(this.container);
         for (let lgn = 0; lgn < this.lgn; lgn++) {
