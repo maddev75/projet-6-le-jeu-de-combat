@@ -56,7 +56,7 @@ class Map {
         // on récupère ses classes ds un tableau
         //console.log('target' + target[0].className);
         let classes = target[0].className.split(/\s+/);
-        //console.log('classes' + classes);
+        console.log('classes' + classes);
         // on vérifie que la classe a pas déjà un wall
         if (!classes.includes('wall')) {
             //si elle a pas de wall
@@ -81,7 +81,7 @@ class Map {
        // console.log(target[0].className);
         //classes=["case","vide"];
         let classes = target[0].className.split(/\s+/);
-       // console.log(classes);
+        //console.log(classes);
         if (!classes.includes('weapon') && !classes.includes('wall') && !classes.includes('player')) {
             target.addClass('weapon');
             target.addClass(weapons[index]);
@@ -100,6 +100,7 @@ class Map {
         let target = $('#col_' + position.x + "_" + position.y);
         //console.log(target);
         let classes = target[0].className.split(/\s+/);
+        
         if (!classes.includes('player') && !classes.includes('wall') && !classes.includes('weapon')) {
             target.addClass('player');
             target.addClass(players[index].pseudo);

@@ -29,26 +29,26 @@ function displayMoves(currentPlayer, map) {
     map.setMooveValable('top', currentPlayer, 3);
     map.setMooveValable('bottom', currentPlayer, 3);
 }
-
-function listenMoves(map, currentPlayer){
-    let player
-    let moveAvailableCases = document.getElementsByClassName('yellow');
+function listenMoves(map, currentPlayer) {
+    //let moveAvailableCases = document.getElementsByClassName('yellow');
+    let moveAvailableCases = $('.yellow');
+    console.log(moveAvailableCases);
     Array.from(moveAvailableCases).forEach(moveCase => {
-        moveCase.addEventListener('click', (event)=> {
-            caseInfo = event.target.id.split('_')
+       // moveCase.addEventListener('click', (event)=> {
+           $(moveCase).click(()=> {
+            let caseInfo = event.target.id.split('_')
+            $(currentPlayer).animate({right: '100px'})
             console.log('case info'+caseInfo)
+          // })
             currentPlayer.position = {x: caseInfo[1], y:0}
-            console.log('curentplay'+currentPlayer);
-        
+            //console.log(player);
         if(currentPlayer === map.players[0]){
             player = map.players[1]
         }else{
             player = map.players[0]
         }
-    
+        console.log(player);
         displayMoves(player, map);
         })
-    })
-}
-    
+
 
