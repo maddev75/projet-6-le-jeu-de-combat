@@ -20,7 +20,7 @@ let currentPlayerNb = getRandomInt(players.length);
         currentPlayer = map.players[1]
     }
 displayMoves(currentPlayer, map);
-listenMoves(map, currentPlayer);qsde
+listenMoves(map, currentPlayer);
 });
 
 function displayMoves(currentPlayer, map) {
@@ -29,16 +29,26 @@ function displayMoves(currentPlayer, map) {
     map.setMooveValable('top', currentPlayer, 3);
     map.setMooveValable('bottom', currentPlayer, 3);
 }
-/*
+
 function listenMoves(map, currentPlayer){
     let player
-    document.getElementById('map').addEventListener('click', ()=> {
+    let moveAvailableCases = document.getElementsByClassName('yellow');
+    Array.from(moveAvailableCases).forEach(moveCase => {
+        moveCase.addEventListener('click', (event)=> {
+            caseInfo = event.target.id.split('_')
+            console.log('case info'+caseInfo)
+            currentPlayer.position = {x: caseInfo[1], y:0}
+            console.log('curentplay'+currentPlayer);
+        
         if(currentPlayer === map.players[0]){
             player = map.players[1]
         }else{
             player = map.players[0]
         }
+    
         displayMoves(player, map);
+        })
     })
-}*/
+}
+    
 

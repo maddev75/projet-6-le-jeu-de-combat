@@ -54,18 +54,18 @@ class Map {
         // on récupère la case sélectionnée au hasard
         let target = $('#col_' + x + "_" + y);
         // on récupère ses classes ds un tableau
-        console.log('target' + target[0].className);
+        //console.log('target' + target[0].className);
         let classes = target[0].className.split(/\s+/);
-        console.log('classes' + classes);
+        //console.log('classes' + classes);
         // on vérifie que la classe a pas déjà un wall
         if (!classes.includes('wall')) {
             //si elle a pas de wall
             target.addClass('wall');
-            console.log(target);
+            //console.log(target);
             return 1
         } else {
-            console.error("La case a déjà un mur");
-            console.log(target);
+            //console.error("La case a déjà un mur");
+            //console.log(target);
             return 0
         }
     }
@@ -76,12 +76,12 @@ class Map {
         let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let target = $('#col_' + x + "_" + y);
-        console.log(target);
+        //console.log(target);
         //<div class="case vide"></div>
-        console.log(target[0].className);
+       // console.log(target[0].className);
         //classes=["case","vide"];
         let classes = target[0].className.split(/\s+/);
-        console.log(classes);
+       // console.log(classes);
         if (!classes.includes('weapon') && !classes.includes('wall') && !classes.includes('player')) {
             target.addClass('weapon');
             target.addClass(weapons[index]);
@@ -93,12 +93,12 @@ class Map {
         let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let position = { x: x, y: y };
-        console.log(position);
+        //console.log(position);
         if(index > 0 ) {
             position = this.keepSocialDistanceFrom(this.players[0], 3);
         }
         let target = $('#col_' + position.x + "_" + position.y);
-        console.log(target);
+        //console.log(target);
         let classes = target[0].className.split(/\s+/);
         if (!classes.includes('player') && !classes.includes('wall') && !classes.includes('weapon')) {
             target.addClass('player');
@@ -118,8 +118,8 @@ class Map {
     }
     keepSocialDistanceFrom = (joueur, nbCases) => {
         let j2 = { x: 5, y: 5 }
-        console.log(j2);
-        console.log("type of j2:", typeof (j2));
+        //console.log(j2);
+        //console.log("type of j2:", typeof (j2));
         let good = false;
         while (!good) {
             j2.y = this.getRandomInt((this.lgn));
@@ -136,7 +136,7 @@ class Map {
             let caseString = `#col_${joueur.position.x}_${joueur.position.y + i}`
             let boardCase = $(caseString);
             //this.moovePosition(boardCase);
-           console.log(boardCase);
+           //console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
@@ -151,7 +151,7 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x}_${joueur.position.y - i}`
             let boardCase = $(caseString);
-            console.log(boardCase);
+            //console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
@@ -169,7 +169,7 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x + i}_${joueur.position.y}`
             let boardCase = $(caseString);
-            console.log(boardCase);
+           // console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
@@ -184,7 +184,7 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x - i}_${joueur.position.y}`
             let boardCase = $(caseString);
-            console.log(boardCase);
+           // console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
