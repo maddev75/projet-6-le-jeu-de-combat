@@ -35,18 +35,22 @@ function listenMoves(map, currentPlayer){
        moveCase.addEventListener('click', (event)=> {
            //$(moveCase).click(()=> {
              caseInfo = event.target.id.split('_')
-             bouge();
+            
             //currentPlayer.animate({left:'100px'}, 1000);
             console.log('case info'+ caseInfo)
             //currentPlayer.position = {x: caseInfo[1], y:0}
            
             if(currentPlayer === map.players[0]){
-                player = map.players[1]
+                player = map.players[0]
+               
+
                 console.log(currentPlayer.position);
             //$(currentPlayer).animate({left:'100px'}, 1000);
 
             }else{
-                player = map.players[0]
+                player = map.players[1]
+                
+
                 console.log(currentPlayer.position);
 
                 //$(currentPlayer).animate({left:'100px'}, 1000);
@@ -55,15 +59,6 @@ function listenMoves(map, currentPlayer){
         })
     })
 }function bouge(){
-    let currentPlayer;
-    let currentPlayerNb = getRandomInt(players.length);
-    if (currentPlayerNb === 0) {
-        alert('Le soldat 1 commence')
-    currentPlayer = map.players[0]
-    }else{
-        alert('Le soldat 2 commence')
-        currentPlayer = map.players[1]
-    }
     currentPlayer.style.top = 100;
     requestAnimationFrame(bouge);
 }
