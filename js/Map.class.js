@@ -134,7 +134,7 @@ class Map {
     }
     setMooveValableRight = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.position.x}_${joueur.position.y + i}`
+            let caseString = `#col_${joueur.position.x}_${parseInt(joueur.position.y) + i}`
             let boardCase = $(caseString);
             //this.moovePosition(boardCase);
            //console.log(boardCase);
@@ -168,7 +168,7 @@ class Map {
     }
     setMooveValableTop = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
-            let caseString = `#col_${joueur.position.x + i}_${joueur.position.y}`
+            let caseString = `#col_${parseInt(joueur.position.x) + i}_${joueur.position.y}`
             let boardCase = $(caseString);
            // console.log(boardCase);
             if (boardCase[0] !== undefined) {

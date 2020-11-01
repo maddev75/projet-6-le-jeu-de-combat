@@ -31,37 +31,42 @@ function listenMoves(map, currentPlayer){
     let player 
     //let moveAvailableCases = document.getElementsByClassName('yellow');
     let moveAvailableCases = $('.yellow');
-    Array.from(moveAvailableCases).forEach(moveCase => {
-       moveCase.addEventListener('click', (event)=> {
+    moveAvailableCases.on('click', (event)=> {
            //$(moveCase).click(()=> {
-             caseInfo = event.target.id.split('_')
+            let caseInfo = event.target.id.split('_')
             
-            //currentPlayer.animate({left:'100px'}, 1000);
-            console.log('case info'+ caseInfo)
-            //currentPlayer.position = {x: caseInfo[1], y:0}
-           
+            let caseCliquee = $("#"+event.target.id);
+            //console.log(caseCliquee);
+            let currentPlayerCase = $('#col_'+currentPlayer.position.x+'_'+currentPlayer.position.y);
+            let classesJoueur = currentPlayerCase.attr("class").split(/\s+/);
+            let classesCliquee = caseCliquee.attr("class").split(/\s+/);
+            //console.log('case info'+ classesJoueur)
+            //console.log('case info'+ classesCliquee)
+            let changeJoueur = classesJoueur.join(' ');
+            let changeCliquee = classesCliquee.join(' ');
+            caseCliquee.removeClass(changeCliquee);
+            caseCliquee.addClass(changeJoueur);
+            currentPlayerCase.removeClass(changeJoueur);
+            currentPlayerCase.addClass(changeCliquee);
+            //actualise joueur
+            currentPlayer.position.x = caseInfo[1];
+            currentPlayer.position.y = caseInfo[2];
+            //enleve jaune
+            moveAvailableCases = $('.yellow');
+            moveAvailableCases.off();
+            moveAvailableCases.removeClass('yellow');
+
             if(currentPlayer === map.players[0]){
-                player = map.players[0]
-               
-
-                console.log(currentPlayer.position);
-            //$(currentPlayer).animate({left:'100px'}, 1000);
-
-            }else{
-                player = map.players[1]
+                currentPlayer = map.players[1]
                 
+            }else{
+                currentPlayer = map.players[0]
+                 }
+                 displayMoves(currentPlayer, map);
+                 listenMoves(map, currentPlayer);
+                })
+            }
 
-                console.log(currentPlayer.position);
-
-                //$(currentPlayer).animate({left:'100px'}, 1000);
-                }
-        displayMoves(player, map);
-        })
-    })
-}function bouge(){
-    currentPlayer.style.top = 100;
-    requestAnimationFrame(bouge);
-}
 
 
 
