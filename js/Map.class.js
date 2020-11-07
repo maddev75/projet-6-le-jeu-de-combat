@@ -142,6 +142,8 @@ class Map {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
+                    
+
                 } else {
                     return 0
                 }
@@ -157,9 +159,8 @@ class Map {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
-                    $(boardCase).click(() =>{ 
-                        $(boardCase).css('color', 'orange');
-                        });
+                   
+
                 } else {
                     return 0
                 }
@@ -175,6 +176,8 @@ class Map {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
+                
+
                 } else {
                     return 0
                 }
@@ -190,6 +193,8 @@ class Map {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
+                   
+
                 } else {
                     return 0
                 }

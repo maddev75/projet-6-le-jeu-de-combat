@@ -31,25 +31,32 @@ function listenMoves(map, currentPlayer){
     let player 
     //let moveAvailableCases = document.getElementsByClassName('yellow');
     let moveAvailableCases = $('.yellow');
+    
     moveAvailableCases.on('click', (event)=> {
            //$(moveCase).click(()=> {
             let caseInfo = event.target.id.split('_')
-            
+            console.log('case'+ caseInfo);
             let caseCliquee = $("#"+event.target.id);
             //console.log(caseCliquee);
             let currentPlayerCase = $('#col_'+currentPlayer.position.x+'_'+currentPlayer.position.y);
             let classesJoueur = currentPlayerCase.attr("class").split(/\s+/);
             let classesCliquee = caseCliquee.attr("class").split(/\s+/);
-            //console.log('case info'+ classesJoueur)
-            //console.log('case info'+ classesCliquee)
+            
+
+            console.log('joueur'+classesJoueur)
+            console.log('cliquee'+classesCliquee)
             let changeJoueur = classesJoueur.join(' ');
             let changeCliquee = classesCliquee.join(' ');
             caseCliquee.removeClass(changeCliquee);
             caseCliquee.addClass(changeJoueur);
-            currentPlayerCase.removeClass(changeJoueur);
+         
+        currentPlayerCase.removeClass(changeJoueur);
             currentPlayerCase.addClass(changeCliquee);
+            console.log(currentPlayerCase);
             //actualise joueur
             currentPlayer.position.x = caseInfo[1];
+
+
             currentPlayer.position.y = caseInfo[2];
             //enleve jaune
             moveAvailableCases = $('.yellow');
