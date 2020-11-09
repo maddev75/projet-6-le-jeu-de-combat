@@ -24,8 +24,9 @@ class Map {
             for (let col = 0; col < this.col; col++) {
                 // on attribue un id pour récupérer plus tard la case
                 const $col = $('<div>').addClass('col').attr('id', 'col_' + lgn + '_' + col);
-                $lgn.append($col);
+               // $lgn.append($col);
                 $jeu.append($lgn);
+                $lgn.append($col);
             }
         }
     }
@@ -84,7 +85,7 @@ class Map {
         //console.log(classes);
         if (!classes.includes('weapon') && !classes.includes('wall') && !classes.includes('player')) {
             target.addClass('weapon');
-            target.addClass(weapons[index]);
+            target.addClass(weapons[index].name);
         } else {
             return 0
         }
