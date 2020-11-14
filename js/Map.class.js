@@ -1,5 +1,5 @@
-let weapons = ["gun", "mitraillette", "missile", "lance-rocket"];
-let players = ['soldat1', 'soldat2'];
+//let weapons = ["gun", "mitraillette", "missile", "lance-rocket"];
+//let players = ['soldat1', 'soldat2'];
 
 class Map {
     constructor(container, columns, lines, walls, weapons, players) {
@@ -27,6 +27,7 @@ class Map {
                // $lgn.append($col);
                 $jeu.append($lgn);
                 $lgn.append($col);
+                
             }
         }
     }

@@ -6,6 +6,7 @@ class Soldat {
         this.defendre = defendre;             
         this.niveau = 100;
         this.position = position;
+        this.weapon = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
     }
     
     get informations() {

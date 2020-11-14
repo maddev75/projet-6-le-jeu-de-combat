@@ -35,6 +35,10 @@
   background-image: url('img-jeux/mitraillette.jpg');
   background-size: contain;
 }
+.pistolet {
+  background-image: url('img-jeux/pistolet.png');
+  background-size: contain;
+}
 .soldat1 {
   background-image: url('img-jeux/soldat1.jpg');
   background-size: contain;
