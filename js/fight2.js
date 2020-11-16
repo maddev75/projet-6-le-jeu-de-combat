@@ -1,22 +1,22 @@
 class Soldat {
-    constructor(pseudo, sante, attaque, defendre, niveau, position) {
+    constructor(pseudo, attaque, defendre, niveau, position, weapon) {
         this.pseudo = pseudo;
         this.sante = sante;
         this.attaque = attaque;
         this.defendre = defendre;             
-        this.niveau = 100;
+        this.niveau = 300;
         this.position = position;
         this.weapon = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
     }
     
     get informations() {
-        return this.pseudo + " (" + this.classe + ") a " + this.sante + " points de vie et est au niveau " + this.niveau + ".";
+        return this.pseudo + 'a' + this.sante + " points de vie et est au niveau " + ".";
       }
     
     verifierSante() {
         if(this.sante <= 0) {
             this.sante == 0;
-            console.log(this.pseudo + 'a perdu !');
+            console.log(this.pseudo + 'a perdu la bataille!');
         }
     }
     attaquer(personnage) {
