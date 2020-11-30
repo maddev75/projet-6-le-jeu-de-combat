@@ -4,6 +4,8 @@ class Soldat {
         this.sante = 450;
         this.defendre = false;             
         this.position = position;
+        this.posture = 0;//0=attaq; 1=defense;
+        this.cible = cible;
         this.weapon = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
     }
     get informations() {
@@ -16,42 +18,44 @@ class Soldat {
             console.log(this.pseudo + 'a perdu la bataille!');
         }
     }
-    /*ttaquer(){
-        for (let i = 1; i < 4; i++) {
+    attaquer(arme,player){
+        let butonAttaq = document.querySelector('#attaque');
+        butonAttaq.addEventListener('click', ()=>{
         let attaque;
-        switch (arme) {
+            switch (arme) {
                 case 'pistolet':
                     attaque === 20;
-                    player1.sante -= attaque;
-                    console.log(player1.sante);
+                    player.sante -= attaque;
+                    console.log(sante);
                     break;
                 case 'gun':
                     attaque === 50;
-                player1.sante -= attaque;
-                    console.log(player1.sante);
+                    player.sante -= attaque;
+                    console.log(sante);
                     break;
                 case 'mitraillette':
                     attaque === 100;
-                    player1.sante -= attaque;
-                    console.log(player1.sante);
+                    player.sante -= attaque;
+                    console.log(sante);
                     break;
                 case 'missile':
                     attaque === 150;
-                    player1.sante -= attaque;
-                    console.log(player1.sante);
+                    player.sante -= attaque;
+                    console.log(sante);
                     break;
                 case 'lance-rocket':
                     attaque === 200;
-                    player1.sante -= attaque;
-                    console.log(player1.sante);
+                    player.sante -= attaque;
+                    console.log(sante);
                     break;
                 }
-            }
+            })
         }
-        
-   attaquer(Soldat) {
-        soldat.sante -= this.attaque;
-        console.log(this.pseudo + 'attaque ' + personnage.pseudo + 'en lançant sa lance (' + this.attaque + ' dégats)' );
-        personnage.verifierSante();
-    }*/
+        defendre(){
+            let butonDefense = document.querySelector('#défense');
+            butonDefense.addEventListener('click', ()=>{
+            this.sante = player.sante/2;
+            console.log(sante);
+        })
+    }
 }
