@@ -1,11 +1,12 @@
 class Soldat {
-    constructor(pseudo, position, sante) {
+    constructor(pseudo, position) {
         this.pseudo = pseudo;
         this.sante = 450;
         this.defendre = false;             
         this.position = position;
         this.posture = 0;//0=attaq; 1=defense;
         this.cible = cible;
+        this.actuel = actuel;
         this.weapon = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
     }
     get informations() {
@@ -18,7 +19,7 @@ class Soldat {
             console.log(this.pseudo + 'a perdu la bataille!');
         }
     }
-    attaquer(arme,player){
+    /*attaquer(arme, player){
         let butonAttaq = document.querySelector('#attaque');
         butonAttaq.addEventListener('click', ()=>{
         let attaque;
@@ -50,7 +51,7 @@ class Soldat {
                     break;
                 }
             })
-        }
+        }*/
         defendre(){
             let butonDefense = document.querySelector('#défense');
             butonDefense.addEventListener('click', ()=>{
