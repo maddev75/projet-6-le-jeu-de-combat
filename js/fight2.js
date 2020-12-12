@@ -19,6 +19,7 @@ class Soldat {
             console.log(this.pseudo + 'a perdu la bataille!');
         }
     }
+}
     /*attaquer(arme, player){
         let butonAttaq = document.querySelector('#attaque');
         butonAttaq.addEventListener('click', ()=>{
@@ -51,12 +52,12 @@ class Soldat {
                     break;
                 }
             })
-        }*/
+        }
         defendre(){
             let butonDefense = document.querySelector('#défense');
             butonDefense.addEventListener('click', ()=>{
-            this.sante = player.sante/2;
+            this.soldat.sante = soldat.sante/2;
             console.log(sante);
         })
     }
-}
+}*/
