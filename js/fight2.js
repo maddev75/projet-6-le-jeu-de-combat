@@ -16,7 +16,8 @@ class Soldat {
             console.log(this.pseudo + 'a perdu la bataille!');
         }
     }
-    /*ttaquer(){
+}
+    /*attaquer(){
         for (let i = 1; i < 4; i++) {
         let attaque;
         switch (arme) {
@@ -54,4 +55,3 @@ class Soldat {
         console.log(this.pseudo + 'attaque ' + personnage.pseudo + 'en lançant sa lance (' + this.attaque + ' dégats)' );
         personnage.verifierSante();
     }*/
-}
