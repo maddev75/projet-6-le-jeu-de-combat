@@ -4,9 +4,7 @@ class Soldat {
         this.sante = 450;
         this.defendre = false;             
         this.position = position;
-        this.posture = 0;//0=attaq; 1=defense;
-        this.cible = cible;
-        this.actuel = actuel;
+      
         this.weapon = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
     }
     get informations() {
@@ -20,14 +18,8 @@ class Soldat {
         }
     }
 }
-<<<<<<< HEAD
     /*attaquer(){
         for (let i = 1; i < 4; i++) {
-=======
-    /*attaquer(arme, player){
-        let butonAttaq = document.querySelector('#attaque');
-        butonAttaq.addEventListener('click', ()=>{
->>>>>>> e69a6aa937dfcb43902bad9f85d3b4d95579f112
         let attaque;
             switch (arme) {
                 case 'pistolet':
@@ -58,20 +50,9 @@ class Soldat {
                 }
             })
         }
-<<<<<<< HEAD
         
    attaquer(Soldat) {
         soldat.sante -= this.attaque;
         console.log(this.pseudo + 'attaque ' + personnage.pseudo + 'en lançant sa lance (' + this.attaque + ' dégats)' );
         personnage.verifierSante();
     }*/
-=======
-        defendre(){
-            let butonDefense = document.querySelector('#défense');
-            butonDefense.addEventListener('click', ()=>{
-            this.soldat.sante = soldat.sante/2;
-            console.log(sante);
-        })
-    }
-}*/
->>>>>>> e69a6aa937dfcb43902bad9f85d3b4d95579f112
