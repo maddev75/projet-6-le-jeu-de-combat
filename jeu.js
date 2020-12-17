@@ -102,7 +102,7 @@ $(function () {
                 changeJoueur = classesJoueur.join(' ');
                 //currentPlayerCase.removeClass("weapon")
                 currentPlayerCase.removeClass('player')
-            } else {
+            }else{
                 currentPlayerCase.removeClass(changeJoueur);
                 currentPlayerCase.addClass('col');
             }
@@ -137,55 +137,56 @@ $(function () {
     }
    function fight(currentPlayer) {
         let agresseur;
-        if (currentPlayer === map.players[0]) {// cible
+        if(currentPlayer === map.players[0]) {// cible
             agresseur = map.players[1];
-        } else {
+        }else{
             agresseur = map.players[0];
         }
         let butonAttaq = document.getElementById('attaq');
         butonAttaq.addEventListener('click', () => {
             action = 'attaquer';
             attaquerDefendre(action, currentPlayer, agresseur);
-            if (agresseur === map.players[0]) {
+            if(agresseur === map.players[0]) {
                 agresseur = map.players[1];
                 currentPlayer = map.players[0];
-            } else {
+            }else{
                 agresseur = map.players[0]
                 currentPlayer = map.players[1];
             }
             //attaquer(currentPlayer, agresseur);
         })
         let butonDefense = document.getElementById('defense');
-        butonDefense.addEventListener('click', () => {
+        butonDefense.addEventListener('click', ()=>{
             action = 'defendre';
+
             attaquerDefendre(action, currentPlayer, agresseur);
-            if (agresseur === map.players[0]) {
+            if(agresseur === map.players[0]){
                 agresseur = map.players[0];
                 currentPlayer = map.players[1];
-            } else {
+            }else{
                 agresseur = map.players[1]
                 currentPlayer = map.players[0];
             }
         })
     }
-    function attaquer(currentPlayer, agresseur) {
+    function attaquer(currentPlayer, agresseur){
         currentPlayer.sante -= agresseur.weapon.damage;
         console.log('agresseur', agresseur);
         console.log('cible', currentPlayer);
     }
-    function defense(currentPlayer, agresseur) {
-        currentPlayer.sante -= agresseur.weapon.damage / 2;
+    function defense(currentPlayer, agresseur){
+        currentPlayer.sante -= agresseur.weapon.damage/2;
         //return 'agresseur', agresseur;
         return 'cible', currentPlayer.sante;
     }
-    function attaquerDefendre(action, currentPlayer, agresseur) {
-        switch (action) {
+    function attaquerDefendre(action, currentPlayer, agresseur){
+        switch (action){
             case 'attaquer': attaquer(currentPlayer, agresseur);
                 break;
             case 'defendre': defense(currentPlayer, agresseur);
                 break;
+            }
         }
-    }
 });
 
 
