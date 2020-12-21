@@ -1,8 +1,42 @@
-
-#map {
+#bouton-zone{
   text-align: center;
-  margin: auto;
-
+  padding: 15px;
+}
+#container {
+display: flex;
+justify-content: space-around;
+}
+#zone-soldat1{
+  border: solid 1px black;
+  height: 750px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#zone-soldat2{
+  border: solid 1px black;
+  height: 750px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#img-soldat1{
+  height: 150px;
+  width: 150px;
+}
+#img-soldat2{
+  height: 150px;
+  width: 150px;
+}
+#arme-p1{
+  height: 150px;
+  width: 150px;
+}
+#arme-p2{
+  height: 150px;
+  width: 150px;
 }
 .row {
     height: 50px;

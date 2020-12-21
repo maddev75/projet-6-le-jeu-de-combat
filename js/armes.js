@@ -3,6 +3,7 @@ class Arme {
         this.name = name;
         this.damage = damage;
         this.style = style;
+        
     }
 }
 
