@@ -14,10 +14,9 @@ $(function () {
     let player2 = new Soldat('soldat2', { x: 0, y: 0 });
     let players = [player1, player2];
     const map = new Map('#map', 10, 10, 10, weapons, players);
-    //let logoSante = $('#soldat1-sante').append(player1.sante);
-    //let logoArme = $("#soldat1-arme").append(player1.arme.name);
-    //let logoDegat = $('#soldat1-degat').append(arme.damage);
-    //let logoImage = $('#image-arme').append(arme.style);
+    player1.displayInfo();
+    player2.displayInfo();
+
     let currentPlayer;
     let currentPlayerNb = getRandomInt(players.length);
     if (currentPlayerNb === 0) {
@@ -41,19 +40,28 @@ $(function () {
             moveAvailableCases.off();
             moveAvailableCases.removeClass('yellow');
             let caseInfo = event.target.id.split('_')
+            console.log('caseinfo', caseInfo);
             let caseCliquee = $("#" + event.target.id);
+            console.log('casecliquee', caseCliquee);
             let currentPlayerCase = $('#col_' + currentPlayer.position.x + '_' + currentPlayer.position.y);
+            console.log('currentPlayercase', currentPlayerCase);
             let classesJoueur = currentPlayerCase.attr("class").split(/\s+/);
+            console.log('classesJoueur', classesJoueur);
             let classesCliquee = caseCliquee.attr('class').split(/\s+/);
             console.log('classesclique', classesCliquee);
             let lastWeaponPlayer = currentPlayer.weapon;
             currentPlayer.position.x = caseInfo[1];
             currentPlayer.position.y = caseInfo[2];
+            console.log('curentplayer', currentPlayer);
+            
             if (classesCliquee.includes('weapon')) {
                 exchangeWeapons(classesCliquee, caseCliquee, lastWeaponPlayer);
+                currentPlayer.displayInfo();
             }
             if (classesJoueur.includes('weapon')) {
                 updateWeapons(classesJoueur, currentPlayerCase, changeJoueur);
+                currentPlayer.displayInfo();
+                
             }else{
                 changeJoueur = classesJoueur;
                 currentPlayerCase.removeClass(changeJoueur);
@@ -120,10 +128,11 @@ $(function () {
         let butonAttaq = document.getElementById('attaq');
         butonAttaq.addEventListener('click', () =>{
             attaquer(currentPlayer, agresseur);
-            if(currentPlayer.sante <=0 || agresseur.sante <=0){
-                alert('le combat est fini');
+            currentPlayer.displayInfo();
+            if(currentPlayer.sante <=0){
+                alert(currentPlayer.pseudo + ' a perdu');
             }
-            if(agresseur === map.players[0]) {
+            if(agresseur === map.players[0]){
                 agresseur = map.players[1];
                 currentPlayer = map.players[0];
             }else{
@@ -134,6 +143,7 @@ $(function () {
         let butonDefense = document.getElementById('defense');
         butonDefense.addEventListener('click', ()=>{
             defense(currentPlayer, agresseur);
+            currentPlayer.displayInfo();
             if(agresseur === map.players[0]) {
                 agresseur = map.players[1];
                 currentPlayer = map.players[0];

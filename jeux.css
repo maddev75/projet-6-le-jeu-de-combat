@@ -22,6 +22,10 @@ justify-content: space-around;
   flex-direction: column;
   align-items: center;
 }
+#avatar{
+  height: 150px;
+  width: 150px;
+}
 #img-soldat1{
   height: 150px;
   width: 150px;
