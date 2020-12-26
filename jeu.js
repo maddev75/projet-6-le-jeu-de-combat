@@ -3,10 +3,10 @@ $(function () {
     getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max));
     }
-    let weaponOne = new Arme('gun', 50, 'img-jeux/gun.jpg');
-    let weaponTwo = new Arme('mitraillette', 100, 'img-jeux/mitraillette.jpg');
-    let weaponTree = new Arme('missile', 150, 'img-jeux/missile.jpg');
-    let weaponFour = new Arme('lance-rocket', 200, 'img-jeux/lance-rocket.jpg');
+    let weaponOne = new Arme('gun', 50, `<img src='img-jeux/gun.jpg'></img>`);
+    let weaponTwo = new Arme('mitraillette', 100, `<img src='img-jeux/mitraillette.jpg'></img>`);
+    let weaponTree = new Arme('missile', 150, `<img src='img-jeux/missile.jpg'></img>`);
+    let weaponFour = new Arme('lance-rocket', 200, `<img src='img-jeux/lance-rocket.jpg'></img>`);
     //let weaponFive = new Arme('pistolet', 20, 'img-jeux/pistolet.png');
 
     let weapons = [weaponOne, weaponTwo, weaponTree, weaponFour];
@@ -14,20 +14,23 @@ $(function () {
     let player2 = new Soldat('soldat2', { x: 0, y: 0 });
     let players = [player1, player2];
     const map = new Map('#map', 10, 10, 10, weapons, players);
+    
     player1.displayInfo();
     player2.displayInfo();
 
     let currentPlayer;
     let currentPlayerNb = getRandomInt(players.length);
     if (currentPlayerNb === 0) {
-        alert('Le soldat 1 commence')
-        currentPlayer = map.players[0]
+        alert('Le soldat 1 commence');
+        currentPlayer = map.players[0];
     } else {
-        alert('Le soldat 2 commence')
-        currentPlayer = map.players[1]
+        alert('Le soldat 2 commence');
+        currentPlayer = map.players[1];
     }
     displayMoves(currentPlayer, map);
     listenMoves(map, currentPlayer);
+   
+    
     function displayMoves(currentPlayer, map) {
         map.setMooveValable('right', currentPlayer, 3);
         map.setMooveValable('left', currentPlayer, 3);
@@ -49,13 +52,13 @@ $(function () {
             console.log('classesJoueur', classesJoueur);
             let classesCliquee = caseCliquee.attr('class').split(/\s+/);
             console.log('classesclique', classesCliquee);
-            let lastWeaponPlayer = currentPlayer.weapon;
+            let lastWeaponPlayer = null;
             currentPlayer.position.x = caseInfo[1];
             currentPlayer.position.y = caseInfo[2];
             console.log('curentplayer', currentPlayer);
             
             if (classesCliquee.includes('weapon')) {
-                exchangeWeapons(classesCliquee, caseCliquee, lastWeaponPlayer);
+                /*exchangeWeapons(classesCliquee, caseCliquee, lastWeaponPlayer);
                 currentPlayer.displayInfo();
             }
             if (classesJoueur.includes('weapon')) {
@@ -66,6 +69,52 @@ $(function () {
                 changeJoueur = classesJoueur;
                 currentPlayerCase.removeClass(changeJoueur);
                 currentPlayerCase.addClass('col');
+            }*/
+            classesCliquee.splice(classesCliquee.indexOf('col'), 1); // on supprime col du tableau classesCliquee
+            classesCliquee.splice(classesCliquee.indexOf('weapon'), 1); // on supprime weapon du tableau classesCliquee
+             //classesCliquee.splice(classesCliquee.indexOf('yellow'), 1); // on supprime yellow du tableau classesCliquee
+             // il ne reste dans classesCliquee que la classe de l'arme
+             //console.log("arme trouvée sur la case :", classesCliquee);
+             // l'arme que le joueur a avant d'arriver sur la case. 
+             lastWeaponPlayer = currentPlayer.weapon;
+             //console.log("lastWeaponPlayer", lastWeaponPlayer)
+             // Dans le tableau des armes de la map, on récupère l'arme correspondant à la case
+             let foundWeapon = map.weapons.find(elt => elt.name === classesCliquee[0]);
+             currentPlayer.weapon = foundWeapon;
+             // on récupère l'index de l'arme qu'on a trouvé
+             let foundWeaponIndex = map.weapons.findIndex(elt => elt.name === foundWeapon.name)
+             // on supprime l'arme du tableau grace à son index
+             map.weapons.splice(foundWeaponIndex, 1);
+             // on ajoute au tableau des armes
+             map.weapons.push(lastWeaponPlayer);
+             console.log('Weapons de la map', map.weapons);
+             // on ajoute la classe arme et weapon a la case qu'on a cliqué 
+             caseCliquee.addClass(lastWeaponPlayer.name);
+             caseCliquee.addClass('weapon');
+             //on supprime la classe de l'arme qu'on a trouvé
+             caseCliquee.removeClass(foundWeapon.name);
+             
+         }
+         let changeJoueur = classesJoueur.join(' ');
+        // lorsque l'on ressort d'une case où il y avait une arme  
+        if (classesJoueur.includes('weapon')) {
+             console.log(currentPlayerCase);
+             classesJoueur.splice(classesJoueur.indexOf('col'), 1); // on supprime col du tableau classesCliquee
+             classesJoueur.splice(classesJoueur.indexOf('player'), 1); // on supprime weapon du tableau classesCliquee
+            if(classesJoueur.includes('soldat1')){classesJoueur.splice(classesJoueur.indexOf('soldat1'), 1);currentPlayerCase.removeClass('soldat1');}
+             else{classesJoueur.splice(classesJoueur.indexOf('soldat2'), 1);currentPlayerCase.removeClass('soldat2');}
+             if (classesJoueur.indexOf('gun') >= 0) { classesJoueur.splice(classesJoueur.indexOf('gun'), 1) };
+             if (classesJoueur.indexOf('mitraillette') >= 0) { classesJoueur.splice(classesJoueur.indexOf('mitraillette'), 1) };
+             if (classesJoueur.indexOf('missile') >= 0) { classesJoueur.splice(classesJoueur.indexOf('missile'), 1) };
+             if (classesJoueur.indexOf('lance-rocket') >= 0) { classesJoueur.splice(classesJoueur.indexOf('lance-rocket'), 1) };
+             if (classesJoueur.indexOf('pistolet') >= 0) { classesJoueur.splice(classesJoueur.indexOf('pistolet'), 1) };
+             changeJoueur = classesJoueur.join(' ');
+             //currentPlayerCase.removeClass("weapon")
+             currentPlayerCase.removeClass('player')
+
+              } else {
+             currentPlayerCase.removeClass(changeJoueur);
+             currentPlayerCase.addClass('col');
             }
             caseCliquee.addClass("col");
             caseCliquee.addClass('player');
@@ -87,6 +136,8 @@ $(function () {
                 return;
                 attaquer(currentPlayer, lastWeaponPlayer.name);
             }
+            player1.displayInfo();
+            player2.displayInfo();
             displayMoves(currentPlayer, map);
             listenMoves(map, currentPlayer);
         })
@@ -94,7 +145,8 @@ $(function () {
     function exchangeWeapons(classesCliquee, caseCliquee, lastWeaponPlayer) {
         classesCliquee.splice(classesCliquee.indexOf('col'), 1); // on supprime col du tableau classesCliquee
         classesCliquee.splice(classesCliquee.indexOf('weapon'), 1); // on supprime weapon du tableau classesCliquee
-        console.log("lastWeaponPlayer", lastWeaponPlayer)
+        lastWeaponPlayer = currentPlayer.weapon;
+        console.log("lastWeaponPlayer", lastWeaponPlayer);
         let foundWeapon = map.weapons.find(elt => elt.name === classesCliquee[0]);
         currentPlayer.weapon = foundWeapon;
         let foundWeaponIndex = map.weapons.findIndex(elt => elt.name === foundWeapon.name)

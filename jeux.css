@@ -1,44 +1,64 @@
+@font-face {  
+  font-family: 'REVOLUTI';
+  src: url('fonts/REVOLUTI.ttf') format("truetype");
+  font-weight: normal;
+}
+body{
+  background-color: #E0E0E0;
+  font-family: 'revoluti';
+}
+
 #bouton-zone{
   text-align: center;
   padding: 15px;
+}
+#attaq, #defense, #règles{
+  font-size: 13px;
+  font-weight: lighter;
+  color: white;
+  padding: 5px 15px;
+  background:#212121;
+  outline: none;
+  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: #E0E0E0;
 }
 #container {
 display: flex;
 justify-content: space-around;
 }
 #zone-soldat1{
+  font-family: 'REVOLUTI';
+  background-color: white;
   border: solid 1px black;
-  height: 750px;
-  width: 300px;
+  height: 550px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 #zone-soldat2{
+  background-color: white;
   border: solid 1px black;
-  height: 750px;
-  width: 300px;
+  height: 550px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#avatar{
-  height: 150px;
-  width: 150px;
+#map{
+  height:500px;
+  width: 520px;
+}
+img{
+  height: 50px;
+  width: 50px;
 }
 #img-soldat1{
   height: 150px;
   width: 150px;
 }
 #img-soldat2{
-  height: 150px;
-  width: 150px;
-}
-#arme-p1{
-  height: 150px;
-  width: 150px;
-}
-#arme-p2{
   height: 150px;
   width: 150px;
 }
@@ -55,7 +75,8 @@ justify-content: space-around;
     
   }
 .wall {
-    background-color: black;
+    background-color:#212121;
+    
 }
 .gun {
   background-image: url('img-jeux/gun.jpg');
@@ -73,21 +94,22 @@ justify-content: space-around;
   background-image: url('img-jeux/mitraillette.jpg');
   background-size: contain;
 }
-.pistolet {
-  background-image: url('img-jeux/pistolet.png');
+.epée {
+  background-image: url('img-jeux/epée.jpg');
   background-size: contain;
 }
 .soldat1 {
   background-image: url('img-jeux/soldat1.jpg');
-  background-size: contain;
+  background-size:cover;
+  
 }
 .soldat2 {
   background-image: url('img-jeux/soldat2.jpg');
-  background-size: contain;
+  background-size: cover;
 }
 .yellow {
-  background-color: yellow;
-  
+  background-color: 
+  #9E9E9E;
 }
 
 
