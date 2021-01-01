@@ -1,6 +1,3 @@
-//let weapons = ["gun", "mitraillette", "missile", "lance-rocket"];
-//let players = ['soldat1', 'soldat2'];
-
 class Map {
     constructor(container, columns, lines, walls, weapons, players) {
         this.col = columns;
@@ -16,18 +13,15 @@ class Map {
         this.createElement('wall', this.mur, 0);
         this.createElement('weapon', this.weapons.length, 0);
         this.createElement('player', this.players.length, 3);
-      }
+    }
     createGrid() {
         const $jeu = $(this.container);
         for (let lgn = 0; lgn < this.lgn; lgn++) {
             const $lgn = $('<div>').addClass('row');
             for (let col = 0; col < this.col; col++) {
-                // on attribue un id pour récupérer plus tard la case
                 const $col = $('<div>').addClass('col').attr('id', 'col_' + lgn + '_' + col);
-               // $lgn.append($col);
                 $jeu.append($lgn);
                 $lgn.append($col);
-                
             }
         }
     }
@@ -53,37 +47,25 @@ class Map {
     createWalls = () => {
         let x = this.getRandomInt(this.col);
         let y = this.getRandomInt(this.lgn);
-        // on récupère la case sélectionnée au hasard
         let target = $('#col_' + x + "_" + y);
-        // on récupère ses classes ds un tableau
-        //console.log('target' + target[0].className);
+        console.log('target', target);
         let classes = target[0].className.split(/\s+/);
-        console.log('classes' + classes);
-        // on vérifie que la classe a pas déjà un wall
+        console.log('classes', classes);
         if (!classes.includes('wall')) {
-            //si elle a pas de wall
             target.addClass('wall');
-            //console.log(target);
             return 1
         } else {
-            //console.error("La case a déjà un mur");
-            //console.log(target);
             return 0
         }
     }
-    getRandomInt = (max) => { 
+    getRandomInt = (max) => {
         return Math.floor(Math.random() * Math.floor(max));
     }
     createWeapons = (weapons, index) => {
         let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let target = $('#col_' + x + "_" + y);
-        //console.log(target);
-        //<div class="case vide"></div>
-       // console.log(target[0].className);
-        //classes=["case","vide"];
         let classes = target[0].className.split(/\s+/);
-        //console.log(classes);
         if (!classes.includes('weapon') && !classes.includes('wall') && !classes.includes('player')) {
             target.addClass('weapon');
             target.addClass(weapons[index].name);
@@ -95,34 +77,26 @@ class Map {
         let y = this.getRandomInt((this.lgn));
         let x = this.getRandomInt((this.col));
         let position = { x: x, y: y };
-        //console.log(position);
-        if(index > 0 ) {
+        if (index > 0) {
             position = this.keepSocialDistanceFrom(this.players[0], 3);
         }
         let target = $('#col_' + position.x + "_" + position.y);
-        //console.log(target);
         let classes = target[0].className.split(/\s+/);
-        
         if (!classes.includes('player') && !classes.includes('wall') && !classes.includes('weapon')) {
             target.addClass('player');
             target.addClass(players[index].pseudo);
-            
-            if(index ===0){
+            if (index === 0) {
                 this.players[0].position = { x: position.x, y: position.y };
-                
-         } else {
+            } else {
                 this.players[1].position = { x: position.x, y: position.y };
-         }
-         
-          } else {
+            }
+        } else {
             console.error('cette case contient une classe');
             return 0
         }
     }
     keepSocialDistanceFrom = (joueur, nbCases) => {
         let j2 = { x: 5, y: 5 }
-        //console.log(j2);
-        //console.log("type of j2:", typeof (j2));
         let good = false;
         while (!good) {
             j2.y = this.getRandomInt((this.lgn));
@@ -138,31 +112,24 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x}_${parseInt(joueur.position.y) + i}`
             let boardCase = $(caseString);
-            //this.moovePosition(boardCase);
-           //console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
-                    
-
                 } else {
                     return 0
                 }
             }
         }
     }
-   setMooveValableLeft = (joueur, nbCases) => {
+    setMooveValableLeft = (joueur, nbCases) => {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x}_${joueur.position.y - i}`
             let boardCase = $(caseString);
-            //console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
-                   
-
                 } else {
                     return 0
                 }
@@ -173,13 +140,10 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${parseInt(joueur.position.x) + i}_${joueur.position.y}`
             let boardCase = $(caseString);
-           // console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
-                
-
                 } else {
                     return 0
                 }
@@ -190,13 +154,10 @@ class Map {
         for (let i = 1; i <= nbCases; i++) {
             let caseString = `#col_${joueur.position.x - i}_${joueur.position.y}`
             let boardCase = $(caseString);
-           // console.log(boardCase);
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
                     boardCase.addClass('yellow');
-                   
-
                 } else {
                     return 0
                 }
@@ -222,7 +183,6 @@ class Map {
             }
         }
     }
-   
 }
 
 
