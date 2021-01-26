@@ -28,7 +28,15 @@ $(function () {
     }
     displayMoves(currentPlayer, map);
     listenMoves(map, currentPlayer);
-
+    let rules = $("#règles");
+    rules.click(()=>{
+        alert
+        (`Cliquez sur les cases colorées en gris pour déplacer le joueur dont c'est le tour.
+        Passez sur une case contenant une arme pour en changer.
+        Lorsque les deux joueurs sont côte à côte, ils peuvent choisir de se battre ou de se défendre. 
+        Dès que l'un des joueurs a 0 points de vie, l'autre joueur gagne.
+        Bon jeu !`);
+    });
     function displayMoves(currentPlayer, map) {
         map.setMooveValable('right', currentPlayer, 3);
         map.setMooveValable('left', currentPlayer, 3);
@@ -36,10 +44,10 @@ $(function () {
         map.setMooveValable('bottom', currentPlayer, 3);
     }
     function listenMoves(map, currentPlayer) {
-        let moveAvailableCases = $('.yellow');
+        let moveAvailableCases = $('.moove-gray');
         moveAvailableCases.on('click', (event) => {
             moveAvailableCases.off();
-            moveAvailableCases.removeClass('yellow');
+            moveAvailableCases.removeClass('moove-gray');
             let caseInfo = event.target.id.split('_')
             let caseCliquee = $("#" + event.target.id);
             let currentPlayerCase = $('#col_' + currentPlayer.position.x + '_' + currentPlayer.position.y);

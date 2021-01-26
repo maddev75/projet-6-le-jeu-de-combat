@@ -48,9 +48,7 @@ class Map {
         let x = this.getRandomInt(this.col);
         let y = this.getRandomInt(this.lgn);
         let target = $('#col_' + x + "_" + y);
-        console.log('target', target);
         let classes = target[0].className.split(/\s+/);
-        console.log('classes', classes);
         if (!classes.includes('wall')) {
             target.addClass('wall');
             return 1
@@ -115,7 +113,7 @@ class Map {
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
-                    boardCase.addClass('yellow');
+                    boardCase.addClass('moove-gray');
                 } else {
                     return 0
                 }
@@ -129,7 +127,7 @@ class Map {
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
-                    boardCase.addClass('yellow');
+                    boardCase.addClass('moove-gray');
                 } else {
                     return 0
                 }
@@ -143,7 +141,7 @@ class Map {
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
-                    boardCase.addClass('yellow');
+                    boardCase.addClass('moove-gray');
                 } else {
                     return 0
                 }
@@ -157,7 +155,7 @@ class Map {
             if (boardCase[0] !== undefined) {
                 let classes = boardCase[0].className.split(/\s+/);
                 if (!classes.includes('wall')) {
-                    boardCase.addClass('yellow');
+                    boardCase.addClass('moove-gray');
                 } else {
                     return 0
                 }
