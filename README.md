@@ -1,6 +1,6 @@
 ## Projet-6-le-jeu-de-combat
 
-Etape 1 : génération de la carte
+## Etape 1 : génération de la carte
 Commencez par générer aléatoirement la carte du jeu. Chaque case peut être soit :
 
 Vide
